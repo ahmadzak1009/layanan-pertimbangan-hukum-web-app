@@ -25,17 +25,18 @@ function Hero() {
               </h2>
 
               <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui hic atque tenetur
-                quis eius quos ea neque sunt, accusantium soluta minus veniam tempora deserunt?
-                Molestiae eius quidem quam repellat.
+                Kantor Pengacara Negara pada Kejaksaan Negeri Tana Toraja menyediakan layananan
+                Pertimbangan Hukum kepada Negara atau Pemerintah, dalam bentuk Pendapat Hukum (legal
+                opinion atau LO) dan/ atau Pendampingan Hukum (legal assistance atau LA) di hidang
+                perdata dan tata usaha negara dan/ atau Audit Hukum (Legal audit) di bidang perdata.
               </p>
 
-              <Button
+              <button
                 href="#"
                 className="mt-8 inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
-                Konsultasi Sekarang
-              </Button>
+                Ajukan Permohonan Sekarang
+              </button>
             </div>
           </div>
         </div>

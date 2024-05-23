@@ -22,9 +22,10 @@ function Tentang() {
               <h2 className="text-2xl font-bold sm:text-3xl">Tentang</h2>
 
               <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, molestiae! Quidem
-                est esse numquam odio deleniti, beatae, magni dolores provident quaerat totam eos,
-                aperiam architecto eius quis quibusdam fugiat dicta.
+                Jaksa Pengacara Negara adalah jaksa yang berdasarkan Surat Kuasa Khusus melakukan
+                Penegakan Hukum dan Bantuan Hukum dan/atau berdasarkan surat perintah melakukan
+                Pertimbangan Hukum, Tindakan Hukum Lain, dan Pelayanan Hukum di bidang perdata dan
+                tata usaha negara.
               </p>
 
               <a

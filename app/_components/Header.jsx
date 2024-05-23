@@ -1,12 +1,21 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 function Header() {
   const [nav, setNav] = useState(false);
+
+  const { user, isLoading } = useKindeBrowserClient();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   const Menu = [
     {
@@ -52,25 +61,53 @@ function Header() {
               <nav aria-label="Global" className="hidden md:block">
                 <ul className="flex items-center gap-6 text-sm">
                   {Menu.map((item, index) => (
-                    <>
-                      <Link href={item.path}>
-                        <li className="text-gray-500 transition hover:text-gray-500/75">
-                          {item.name}
-                        </li>
-                      </Link>
-                    </>
+                    <Link href={item.path} key={index}>
+                      <li className="text-gray-500 transition hover:text-gray-500/75">
+                        {item.name}
+                      </li>
+                    </Link>
                   ))}
                 </ul>
               </nav>
 
               <div className="flex items-center gap-4">
-                <div className="sm:flex sm:gap-4">
-                  <a
-                    className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
-                    href="#"
-                  >
-                    Login
-                  </a>
+                <div className="items-center sm:flex sm:gap-4">
+                  {user ? (
+                    <>
+                      <Popover>
+                        <PopoverTrigger>
+                          <Image
+                            src={user?.picture}
+                            alt="profile-image"
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                          />
+                        </PopoverTrigger>
+                        <PopoverContent className="w-44">
+                          <ul className="flex flex-col">
+                            <li>
+                              <Link
+                                className="flex cursor-pointer hover:bg-slate-100 p-2 rounded-md"
+                                href={"/dashboard"}
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                            <li>
+                              <LogoutLink className="flex cursor-pointer hover:bg-slate-100 p-2 rounded-md">
+                                Logout
+                              </LogoutLink>
+                            </li>
+                          </ul>
+                        </PopoverContent>
+                      </Popover>
+                    </>
+                  ) : (
+                    <LoginLink className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
+                      Login
+                    </LoginLink>
+                  )}
 
                   {/* <div className="hidden sm:flex">
                     <a
@@ -117,8 +154,10 @@ function Header() {
             <ul className="mt-6 space-y-1">
               {Menu.map((item, index) => (
                 <Link
+                  key={index}
                   href={item.path}
                   className="block hover:rounded-lg hover:bg-primary px-4 py-2 text-sm font-medium text-gray-700 hover:text-white"
+                  onClick={() => setNav(false)}
                 >
                   <li>{item.name}</li>
                 </Link>
