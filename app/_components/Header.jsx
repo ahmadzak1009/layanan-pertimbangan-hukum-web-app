@@ -5,6 +5,8 @@ import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import GlobalApi from "../_utils/GlobalApi";
+("@/app/_utils/GlobalApi");
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
@@ -13,9 +15,7 @@ function Header() {
 
   const { user, isLoading } = useKindeBrowserClient();
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   const Menu = [
     {

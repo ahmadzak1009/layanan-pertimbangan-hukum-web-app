@@ -107,6 +107,38 @@ function Profile() {
             {errors.no_hp && <span className="text-sm text-red-500">*This field is required</span>}
           </div>
 
+          <div className="col-span-6 sm:col-span-3">
+            <label htmlFor="nip" className="block text-sm font-medium text-gray-700">
+              NIP
+            </label>
+
+            <Input
+              type="text"
+              id="nip"
+              name="nip"
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              defaultValue={user?.nip}
+              {...register("nip", { required: true })}
+            />
+            {errors.nip && <span className="text-sm text-red-500">*This field is required</span>}
+          </div>
+
+          <div className="col-span-6 sm:col-span-3">
+            <label htmlFor="nik" className="block text-sm font-medium text-gray-700">
+              NIK
+            </label>
+
+            <Input
+              type="text"
+              id="nik"
+              name="nik"
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              defaultValue={user?.nik}
+              {...register("nik", { required: true })}
+            />
+            {errors.nik && <span className="text-sm text-red-500">*This field is required</span>}
+          </div>
+
           <div className="col-span-6">
             <label htmlFor="alamat" className="block text-sm font-medium text-gray-700">
               Alamat
