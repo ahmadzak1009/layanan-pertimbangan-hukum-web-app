@@ -4,11 +4,20 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { Datepicker, FileInput, Modal } from "flowbite-react";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
+import GlobalApi from "@/app/_utils/GlobalApi";
+import { PiSealCheck } from "react-icons/pi";
+import { useRouter } from "next/navigation";
 
 function FormPermohonan() {
-  const { toast } = useToast();
-  const { user } = useKindeBrowserClient();
+  const [idPengguna, setIdPengguna] = useState();
+  const [file, setFile] = useState();
+  const { user, isLoading } = useKindeBrowserClient();
+  const [date, setDate] = useState(new Date());
+  const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,18 +25,54 @@ function FormPermohonan() {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    if (!isLoading) {
+      GlobalApi.getOnePenggunaByEmail(user.email)
+        .then((res) => {
+          setIdPengguna(res.data.data[0].id);
+          // console.log(res.data.data[0]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoading]);
 
-  function onSubmit(data) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-    console.log(data);
+  function onSubmit(data, e) {
+    const file = data.dokumenSurat[0];
+
+    // console.log(e);
+
+    GlobalApi.addPengajuan({
+      data: {
+        ...data,
+        // dokumenSurat: { data: data.dokumenSurat[0] },
+        tanggalSurat: format(date, "yyyy-MM-dd", { locale: id }),
+        progressPengajuan: [
+          {
+            progres: "Diproses",
+            keterangan: "sedang di proses",
+            warnaNotif: "yellow",
+          },
+        ],
+        pengguna: {
+          connect: [idPengguna],
+        },
+      },
+    })
+      .then((res) => {
+        // console.log(res.data);
+        const form = new FormData();
+        form.append("ref", "api::pengajuan.pengajuan");
+        form.append("refId", res.data.data.id);
+        form.append("field", "dokumenSurat");
+        form.append("files", file);
+
+        GlobalApi.uploadDokumen(form)
+          .then((res) => {
+            setOpenModal(true);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -37,90 +82,93 @@ function FormPermohonan() {
       </h1>
       <p className="mt-1.5 text-sm text-gray-500"></p>
 
-      <div className="hidden">
+      <div className="">
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
-          <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="nama_lengkap" className="block text-sm font-medium text-gray-700">
-              Nama Lengkap
+          <div className="col-span-6">
+            <label htmlFor="perihal" className="block text-sm font-medium text-gray-700">
+              Perihal
             </label>
 
             <Input
               type="text"
-              id="nama_lengkap"
-              name="nama_lengkap"
+              id="perihal"
+              name="perihal"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.given_name}
-              {...register("nama_lengkap", { required: true })}
+              {...register("perihal", { required: true })}
             />
-            {errors.nama_lengkap && (
+            {errors.perihal && (
               <span className="text-sm text-red-500">*This field is required</span>
             )}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              value={user?.email}
-              {...register("email", { required: true })}
-            />
-            {errors.email && <span className="text-sm text-red-500">*This field is required</span>}
-          </div>
-
-          <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="instansi" className="block text-sm font-medium text-gray-700">
-              Instansi/Lembaga/Badan
+            <label htmlFor="nomorSurat" className="block text-sm font-medium text-gray-700">
+              Nomor Surat
             </label>
 
             <Input
               type="text"
-              id="instansi"
-              name="instansi"
+              id="nomorSurat"
+              name="nomorSurat"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.instansi}
-              {...register("instansi", { required: true })}
+              {...register("nomorSurat", { required: true })}
             />
-            {errors.instansi && (
+            {errors.nomorSurat && (
               <span className="text-sm text-red-500">*This field is required</span>
             )}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="no_hp" className="block text-sm font-medium text-gray-700">
-              No. Telp/HP
+            <label htmlFor="tanggalSurat" className="block text-sm font-medium text-gray-700">
+              Tanggal Surat
             </label>
 
-            <Input
-              type="text"
-              id="no_hp"
-              name="no_hp"
+            <Datepicker
+              id="tanggalSurat"
+              name="tanggalSurat"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.no_hp}
-              {...register("no_hp", { required: true })}
+              value={format(date, "dd MMMM yyyy", { locale: id })}
+              onSelectedDateChanged={(e) => setDate(e)}
+              {...register("tanggalSurat")}
             />
-            {errors.no_hp && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.tanggalSurat && (
+              <span className="text-sm text-red-500">*This field is required</span>
+            )}
           </div>
 
           <div className="col-span-6">
-            <label htmlFor="alamat" className="block text-sm font-medium text-gray-700">
-              Alamat
+            <label htmlFor="penandatanganSurat" className="block text-sm font-medium text-gray-700">
+              Penandatangan Surat
             </label>
 
             <Input
               type="text"
-              id="alamat"
-              name="alamat"
+              id="penandatanganSurat"
+              name="penandatanganSurat"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.alamat}
-              {...register("alamat", { required: true })}
+              {...register("penandatanganSurat", { required: true })}
             />
-            {errors.alamat && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.penandatanganSurat && (
+              <span className="text-sm text-red-500">*This field is required</span>
+            )}
+          </div>
+
+          <div className="col-span-6">
+            <label htmlFor="dokumenSurat" className="block text-sm font-medium text-gray-700">
+              Upload Surat
+            </label>
+
+            <FileInput
+              helperText="PDF (MAX. 3MB)."
+              id="dokumenSurat"
+              name="dokumenSurat"
+              accept="application/pdf"
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              {...register("dokumenSurat", { required: true })}
+            />
+            {errors.dokumenSurat && (
+              <span className="text-sm text-red-500">*This field is required</span>
+            )}
           </div>
 
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
@@ -128,11 +176,35 @@ function FormPermohonan() {
               type="submit"
               className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
             >
-              Simpan
+              Ajukan
             </button>
           </div>
         </form>
       </div>
+
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <PiSealCheck className="mx-auto mb-4 h-20 w-20 text-green-500" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Permohonan berhasil terkirim! <br />
+              Anda dapat melihat progres pengajuan melalui Halaman Daftar Permohonan.
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button
+                color="failure"
+                onClick={() => {
+                  setOpenModal(false);
+                  router.push("/dashboard/daftar-permohonan");
+                }}
+              >
+                Lihat
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }

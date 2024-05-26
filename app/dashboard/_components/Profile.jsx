@@ -2,59 +2,73 @@
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import GlobalApi from "@/app/_utils/GlobalApi";
+import { Modal } from "flowbite-react";
+import { PiSealCheck } from "react-icons/pi";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 function Profile() {
-  const { toast } = useToast();
-  const { user } = useKindeBrowserClient();
+  const [pengguna, setPengguna] = useState({});
+  const [emailPengguna, setEmailPengguna] = useState("");
+  const [idPengguna, setIdPengguna] = useState("");
+  const { user, isLoading } = useKindeBrowserClient();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+  const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    if (!isLoading) {
+      GlobalApi.getOnePenggunaByEmail(user.email)
+        .then((res) => {
+          setPengguna(res.data.data[0].attributes);
+          setIdPengguna(res.data.data[0].id);
+          setEmailPengguna(res.data.data[0].attributes.email);
+          // console.log(res.data.data[0]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoading]);
 
   function onSubmit(data) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-    console.log(data);
+    // console.log(idPengguna, { data: { ...data, identitasLengkap: true } });
+
+    GlobalApi.updatePengguna(idPengguna, { data: { ...data, identitasLengkap: true } })
+      .then((res) => {
+        setOpenModal(true);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
     <>
       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-        Selamat Datang, {user?.given_name}!
+        Selamat Datang, {pengguna?.nama}!
       </h1>
       <p className="mt-1.5 text-sm text-gray-500">Silahkan lengkapi profile anda.</p>
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="nama_lengkap" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="nama" className="block text-sm font-medium text-gray-700">
               Nama Lengkap
             </label>
 
             <Input
               type="text"
-              id="nama_lengkap"
-              name="nama_lengkap"
+              id="nama"
+              name="nama"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.given_name}
-              {...register("nama_lengkap", { required: true })}
+              value={pengguna?.nama}
+              {...register("nama", { required: true })}
             />
-            {errors.nama_lengkap && (
-              <span className="text-sm text-red-500">*This field is required</span>
-            )}
+            {errors.nama && <span className="text-sm text-red-500">*This field is required</span>}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
@@ -64,10 +78,11 @@ function Profile() {
 
             <Input
               type="email"
+              readOnly
               id="email"
               name="email"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              value={user?.email}
+              value={emailPengguna}
               {...register("email", { required: true })}
             />
             {errors.email && <span className="text-sm text-red-500">*This field is required</span>}
@@ -83,7 +98,7 @@ function Profile() {
               id="instansi"
               name="instansi"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.instansi}
+              defaultValue={pengguna?.instansi}
               {...register("instansi", { required: true })}
             />
             {errors.instansi && (
@@ -101,7 +116,7 @@ function Profile() {
               id="no_hp"
               name="no_hp"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.no_hp}
+              defaultValue={pengguna?.no_hp}
               {...register("no_hp", { required: true })}
             />
             {errors.no_hp && <span className="text-sm text-red-500">*This field is required</span>}
@@ -117,7 +132,7 @@ function Profile() {
               id="nip"
               name="nip"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.nip}
+              defaultValue={pengguna?.nip}
               {...register("nip", { required: true })}
             />
             {errors.nip && <span className="text-sm text-red-500">*This field is required</span>}
@@ -133,7 +148,7 @@ function Profile() {
               id="nik"
               name="nik"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.nik}
+              defaultValue={pengguna?.nik}
               {...register("nik", { required: true })}
             />
             {errors.nik && <span className="text-sm text-red-500">*This field is required</span>}
@@ -149,7 +164,7 @@ function Profile() {
               id="alamat"
               name="alamat"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              defaultValue={user?.alamat}
+              defaultValue={pengguna?.alamat}
               {...register("alamat", { required: true })}
             />
             {errors.alamat && <span className="text-sm text-red-500">*This field is required</span>}
@@ -165,6 +180,30 @@ function Profile() {
           </div>
         </form>
       </div>
+
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <PiSealCheck className="mx-auto mb-4 h-20 w-20 text-green-500" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Profile anda sudah lengkap. <br />
+              Lanjut ke Halaman Buat Permohonan?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button
+                color="failure"
+                onClick={() => {
+                  setOpenModal(false);
+                  router.push("/dashboard/buat-permohonan");
+                }}
+              >
+                Ya
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }

@@ -18,7 +18,7 @@ async function BuatPermohonan() {
         <div className="rounded-lg">
           <Sidebar />
         </div>
-        <div className="rounded-lg lg:col-span-2">
+        <div className="rounded-lg lg:col-span-2 bg-gray-100 p-4">
           <FormPermohonan />
         </div>
       </div>

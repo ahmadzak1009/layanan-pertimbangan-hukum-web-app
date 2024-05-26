@@ -12,10 +12,30 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 function Header() {
   const [nav, setNav] = useState(false);
+  const [pengguna, setPengguna] = useState([]);
 
   const { user, isLoading } = useKindeBrowserClient();
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    if (!isLoading) {
+      GlobalApi.getOnePenggunaByEmail(user?.email)
+        .then((res) => {
+          // console.log(res.data.data[0]);
+          if (!res.data.data[0]) {
+            GlobalApi.addPengguna({
+              data: {
+                nama: user.given_name,
+                email: user.email,
+              },
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    // console.log(user);
+  }, [isLoading]);
 
   const Menu = [
     {

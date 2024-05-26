@@ -9,6 +9,25 @@ const axiosClient = axios.create({
   },
 });
 
-const getPengguna = () => axiosClient.get("/penggunas");
+const getPengguna = () => axiosClient.get("/penggunas?populate=*");
+const getOnePenggunaByEmail = (email) =>
+  axiosClient.get(
+    `/penggunas?filters[email][$eq]=${email}&populate[pengajuans][populate][0]=dokumenSurat&populate[pengajuans][populate][1]=progressPengajuan`
+  );
+const addPengguna = (data) => axiosClient.post("/penggunas", data);
+const updatePengguna = (id, data) => axiosClient.put(`/penggunas/${id}`, data);
 
-export default { getPengguna };
+const addPengajuan = (data) => axiosClient.post("/pengajuans", data);
+const getPengajuanById = (id) => axiosClient.get("/pengajuans/" + id + "?populate=*");
+
+const uploadDokumen = (data) => axiosClient.post("/upload", data);
+
+export default {
+  getPengguna,
+  getOnePenggunaByEmail,
+  addPengguna,
+  updatePengguna,
+  addPengajuan,
+  getPengajuanById,
+  uploadDokumen,
+};
