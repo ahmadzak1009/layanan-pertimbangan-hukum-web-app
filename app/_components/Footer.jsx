@@ -3,24 +3,38 @@ import React from "react";
 function Footer() {
   return (
     <footer className="bg-gray-100" id="footer">
-      <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8 lg:pt-24">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-primary">Contact</h2>
+      <div className="mx-auto max-w-screen-xl px-4 pt-6 pb-8 sm:px-6 lg:px-8 lg:pt-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-primary">Kontak</h2>
 
-          <p className="mx-auto mt-4 max-w-sm ">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum maiores ipsum eos
-            temporibus ea nihil.
-          </p>
+            <p className="mx-auto mt-4 max-w-sm ">
+              <b>Kantor Jaksa Pengacara Negara</b> <br />
+              JL. PONGTIKU NO.6 MAKALE KABUPATEN TANA TORAJA - 91811 <br />
+              TELP/FAX. (0423) 22008 EMAIL: kejari_makale@yahoo.com
+            </p>
 
-          <a
+            {/* <a
             href="#"
             className="mt-8 inline-block rounded-full border border-indigo-600 px-12 py-3 text-sm font-medium text-indigo-600 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring active:bg-indigo-500"
           >
             Get Started
-          </a>
-        </div>
+          </a> */}
+          </div>
 
-        <div className="mt-16 border-t border-gray-100 pt-8 sm:flex sm:items-center sm:justify-between lg:mt-24">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15936.00728511911!2d119.8553185!3d-3.0941736!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93ed40907be417%3A0xd7a2825f15c64c0a!2sKejaksaan%20Negeri%20Tana%20Toraja!5e0!3m2!1sid!2sid!4v1716800207551!5m2!1sid!2sid"
+            width="100%"
+            height="250"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-8 sm:px-6 lg:px-8 lg:pt-8">
+        <div className="mt-5 border-t border-gray-100 pt-8 sm:flex sm:items-center sm:justify-between lg:mt-5">
           <ul className="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
             <li>
               <a href="#" className="text-gray-500 transition hover:opacity-75">

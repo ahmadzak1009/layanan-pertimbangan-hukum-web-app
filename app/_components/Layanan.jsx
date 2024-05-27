@@ -5,22 +5,23 @@ function Layanan() {
   const listLayanan = [
     {
       id: 1,
-      name: "Pendapat Hukum",
-      path: "/layanan/pendapat-hukum",
-      description:
-        "Pendapat Hukum (Legal Opinion atau LO) adalah layanan yang diberikan oleh Jaksa Pengacara Negara dalam bentuk tertulis sesuai dengan fakta hukum tentang suatu permasalahan hukum dalam ruang lingkup hukum perdata dan/atau hukum administrasi negara, yang dibuat atas permintaan atau tanpa permintaan dan untuk kepentingan Negara atau Pemerintah atas permasalahan hukum konkret yang sedang atau akan dihadapi.",
-    },
-    {
-      id: 2,
       name: "Pendampingan Hukum",
-      path: "/layanan/pendampingan-hukum",
+      path: "/dashboard",
       description:
         "Pendampingan Hukum (Legal Assistance atau LA) adalah layanan yang diberikan oleh Jaksa Pengacara Negara berupa Konsultasi Hukum dalam ruang lingkup hukum perdata dan/atau hukum administrasi negara, secara berkelanjutan atas suatu kegiatan tertentu dalam rangka memitigasi risiko hukum, tata kelola (govermance), Penyelamatan Keuangan atau Kekayaan Negara, Pemulihan Keuangan atau Kekayaan Negara, pembentukan peraturan, keputusan tata usaha negara dan/atau tindakan pemerintahan.",
     },
     {
+      id: 2,
+      name: "Pendapat Hukum",
+      path: "/dashboard",
+      description:
+        "Pendapat Hukum (Legal Opinion atau LO) adalah layanan yang diberikan oleh Jaksa Pengacara Negara dalam bentuk tertulis sesuai dengan fakta hukum tentang suatu permasalahan hukum dalam ruang lingkup hukum perdata dan/atau hukum administrasi negara, yang dibuat atas permintaan atau tanpa permintaan dan untuk kepentingan Negara atau Pemerintah atas permasalahan hukum konkret yang sedang atau akan dihadapi.",
+    },
+
+    {
       id: 3,
       name: "Audit Hukum",
-      path: "/layanan/audit-hukum",
+      path: "/dashboard",
       description:
         "Audit Hukum (Legal Audit) adalah layanan yang diberikan oleh Jaksa Pengaraca Negara berupa pemeriksaan dokumen secara menyeluruh dan seksama terhadap kegiatan yang telah dilaksanakan oleh Negara dan Pemerintah melalui analisis dan penilaian kepatuhan dari aspek hukum perdata dan/atau hukum administrasi negara, termasuk tata kelola (govermance) dan/atau kelayakan keputusan tata usaha negara.",
     },

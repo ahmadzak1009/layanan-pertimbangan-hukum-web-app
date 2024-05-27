@@ -7,6 +7,7 @@ import { SlInfo, SlDoc } from "react-icons/sl";
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { HiArrowNarrowRight } from "react-icons/hi";
 
 function DaftarPengajuan() {
   const [openModal, setOpenModal] = useState(false);
@@ -79,6 +80,7 @@ function DaftarPengajuan() {
                   <Table.Cell>
                     <a
                       onClick={() => {
+                        console.log(v.attributes.progressPengajuan);
                         setOpenModal(true);
                         setDataModal({
                           perihal: v.attributes.perihal,
@@ -170,10 +172,20 @@ function DaftarPengajuan() {
                     <Timeline.Point />
                     <Timeline.Content>
                       <Timeline.Time>
-                        {format(val.notifiedAt, "PPPPpppp" || new Date(), { locale: id })}
+                        {format(val?.notifiedAt, "PPPPpppp" || new Date(), { locale: id })}
                       </Timeline.Time>
-                      <Timeline.Title>{val.progres}</Timeline.Title>
+                      <Timeline.Title onClick={() => console.log(val)}>
+                        {val.progres}
+                      </Timeline.Title>
                       <Timeline.Body>{val.keterangan}</Timeline.Body>
+                      {val?.file ? (
+                        <>
+                          <Button color="gray">
+                            Lihat Undangan
+                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          </Button>
+                        </>
+                      ) : null}
                     </Timeline.Content>
                   </Timeline.Item>
                 </>

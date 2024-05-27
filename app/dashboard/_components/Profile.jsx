@@ -117,9 +117,9 @@ function Profile() {
               name="no_hp"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.no_hp}
-              {...register("no_hp", { required: true })}
+              {...register("no_hp", { required: true, min: 9, max: 13 })}
             />
-            {errors.no_hp && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.no_hp && <span className="text-sm text-red-500">{}</span>}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
@@ -133,7 +133,7 @@ function Profile() {
               name="nip"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.nip}
-              {...register("nip", { required: true })}
+              {...register("nip", { required: true, min: 16 })}
             />
             {errors.nip && <span className="text-sm text-red-500">*This field is required</span>}
           </div>
@@ -149,7 +149,7 @@ function Profile() {
               name="nik"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.nik}
-              {...register("nik", { required: true })}
+              {...register("nik", { required: true, min: 13 })}
             />
             {errors.nik && <span className="text-sm text-red-500">*This field is required</span>}
           </div>

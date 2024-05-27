@@ -12,6 +12,7 @@ import { PiSealCheck } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 
 function FormPermohonan() {
+  const [pengguna, setPengguna] = useState({});
   const [idPengguna, setIdPengguna] = useState();
   const [file, setFile] = useState();
   const { user, isLoading } = useKindeBrowserClient();
@@ -29,8 +30,13 @@ function FormPermohonan() {
     if (!isLoading) {
       GlobalApi.getOnePenggunaByEmail(user.email)
         .then((res) => {
+          setPengguna(res.data.data[0].attributes);
           setIdPengguna(res.data.data[0].id);
           // console.log(res.data.data[0]);
+
+          if (res.data.data[0].attributes.identitasLengkap == false) {
+            router.push("/dashboard");
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -51,6 +57,7 @@ function FormPermohonan() {
             progres: "Diproses",
             keterangan: "sedang di proses",
             warnaNotif: "yellow",
+            notifiedAt: new Date(),
           },
         ],
         pengguna: {
