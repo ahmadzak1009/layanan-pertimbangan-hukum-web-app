@@ -13,7 +13,7 @@ const axiosClient = axios.create({
 const getPengguna = () => axiosClient.get("/penggunas?populate=*");
 const getOnePenggunaByEmail = (email) =>
   axiosClient.get(
-    `/penggunas?filters[email][$eq]=${email}&populate[pengajuans][populate][0]=dokumenSurat&populate[pengajuans][populate][1]=progressPengajuan`
+    `/penggunas?filters[email][$eq]=${email}&populate[pengajuans][populate][0]=dokumenSurat&populate[pengajuans][populate][1]=progressPengajuan&populate[pengajuans][populate][2]=progressPengajuan.file`
   );
 const addPengguna = (data) => axiosClient.post("/penggunas", data);
 const updatePengguna = (id, data) => axiosClient.put(`/penggunas/${id}`, data);

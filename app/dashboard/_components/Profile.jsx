@@ -66,9 +66,9 @@ function Profile() {
               name="nama"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               value={pengguna?.nama}
-              {...register("nama", { required: true })}
+              {...register("nama", { required: { value: true, message: "wajib diisi" } })}
             />
-            {errors.nama && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.nama && <span className="text-sm text-red-500">{errors.nama.message}</span>}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
@@ -83,9 +83,9 @@ function Profile() {
               name="email"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               value={emailPengguna}
-              {...register("email", { required: true })}
+              {...register("email", { required: { value: true, message: "wajib diisi" } })}
             />
-            {errors.email && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.email && <span className="text-sm text-red-500">{errors.email.message}</span>}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
@@ -99,10 +99,10 @@ function Profile() {
               name="instansi"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.instansi}
-              {...register("instansi", { required: true })}
+              {...register("instansi", { required: { value: true, message: "wajib diisi" } })}
             />
             {errors.instansi && (
-              <span className="text-sm text-red-500">*This field is required</span>
+              <span className="text-sm text-red-500">{errors.instansi.message}</span>
             )}
           </div>
 
@@ -117,9 +117,13 @@ function Profile() {
               name="no_hp"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.no_hp}
-              {...register("no_hp", { required: true, min: 9, max: 13 })}
+              {...register("no_hp", {
+                required: { value: true, message: "wajib diisi" },
+                minLength: { value: 9, message: "minimal 9 angka" },
+                maxLength: { value: 12, message: "maximal 12 angka" },
+              })}
             />
-            {errors.no_hp && <span className="text-sm text-red-500">{}</span>}
+            {errors.no_hp && <span className="text-sm text-red-500">{errors.no_hp.message}</span>}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
@@ -133,9 +137,12 @@ function Profile() {
               name="nip"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.nip}
-              {...register("nip", { required: true, min: 16 })}
+              {...register("nip", {
+                required: { value: true, message: "wajib diisi" },
+                minLength: { value: 16, message: "minimal 16 angka" },
+              })}
             />
-            {errors.nip && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.nip && <span className="text-sm text-red-500">{errors.nip.message}</span>}
           </div>
 
           <div className="col-span-6 sm:col-span-3">
@@ -149,9 +156,12 @@ function Profile() {
               name="nik"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.nik}
-              {...register("nik", { required: true, min: 13 })}
+              {...register("nik", {
+                required: { value: true, message: "wajib diisi" },
+                minLength: { value: 13, message: "minimal 13 angka" },
+              })}
             />
-            {errors.nik && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.nik && <span className="text-sm text-red-500">{errors.nik.message}</span>}
           </div>
 
           <div className="col-span-6">
@@ -165,9 +175,9 @@ function Profile() {
               name="alamat"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               defaultValue={pengguna?.alamat}
-              {...register("alamat", { required: true })}
+              {...register("alamat", { required: { value: true, message: "wajib diisi" } })}
             />
-            {errors.alamat && <span className="text-sm text-red-500">*This field is required</span>}
+            {errors.alamat && <span className="text-sm text-red-500">{errors.alamat.message}</span>}
           </div>
 
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">

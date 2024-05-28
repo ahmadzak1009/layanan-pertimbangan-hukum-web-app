@@ -80,7 +80,7 @@ function DaftarPengajuan() {
                   <Table.Cell>
                     <a
                       onClick={() => {
-                        console.log(v.attributes.progressPengajuan);
+                        // console.log(v.attributes.progressPengajuan);
                         setOpenModal(true);
                         setDataModal({
                           perihal: v.attributes.perihal,
@@ -178,9 +178,12 @@ function DaftarPengajuan() {
                         {val.progres}
                       </Timeline.Title>
                       <Timeline.Body>{val.keterangan}</Timeline.Body>
-                      {val?.file ? (
+                      {val?.file?.data ? (
                         <>
-                          <Button color="gray">
+                          <Button
+                            color="gray"
+                            onClick={() => window.open(val.file.data.attributes.url, "_blank")}
+                          >
                             Lihat Undangan
                             <HiArrowNarrowRight className="ml-2 h-3 w-3" />
                           </Button>

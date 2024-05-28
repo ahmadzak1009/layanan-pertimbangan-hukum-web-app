@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-gray-100" id="footer">
+    <footer className="bg-gray-100" id="kontak">
       <div className="mx-auto max-w-screen-xl px-4 pt-6 pb-8 sm:px-6 lg:px-8 lg:pt-16">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="text-center">
@@ -26,9 +26,8 @@ function Footer() {
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15936.00728511911!2d119.8553185!3d-3.0941736!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d93ed40907be417%3A0xd7a2825f15c64c0a!2sKejaksaan%20Negeri%20Tana%20Toraja!5e0!3m2!1sid!2sid!4v1716800207551!5m2!1sid!2sid"
             width="100%"
             height="250"
-            allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>

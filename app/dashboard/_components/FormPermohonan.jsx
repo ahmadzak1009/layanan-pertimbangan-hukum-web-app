@@ -10,6 +10,7 @@ import { id } from "date-fns/locale";
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { PiSealCheck } from "react-icons/pi";
 import { useRouter } from "next/navigation";
+import { ImProfile } from "react-icons/im";
 
 function FormPermohonan() {
   const [pengguna, setPengguna] = useState({});
@@ -18,6 +19,7 @@ function FormPermohonan() {
   const { user, isLoading } = useKindeBrowserClient();
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -35,7 +37,7 @@ function FormPermohonan() {
           // console.log(res.data.data[0]);
 
           if (res.data.data[0].attributes.identitasLengkap == false) {
-            router.push("/dashboard");
+            setOpenAlert(true);
           }
         })
         .catch((err) => console.log(err));
@@ -207,6 +209,36 @@ function FormPermohonan() {
                 }}
               >
                 Lihat
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={openAlert}
+        size="md"
+        onClose={() => {
+          router.push("/dashboard");
+          setOpenModal(false);
+        }}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <ImProfile className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Silahkan Lengkapi Profile Anda sebelum membuat Permohonan
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={() => {
+                  router.push("/dashboard");
+                  setOpenModal(false);
+                }}
+              >
+                Halaman Profile
               </Button>
             </div>
           </div>
