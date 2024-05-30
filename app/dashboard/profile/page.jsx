@@ -2,10 +2,10 @@ import React from "react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Sidebar from "./_components/Sidebar";
-import Dashboard from "./_components/Dashboard";
+import Profile from "../_components/Profile";
+import Sidebar from "../_components/Sidebar";
 
-async function DashboardPage() {
+async function ProfilePage() {
   const { isAuthenticated } = getKindeServerSession();
 
   if (!(await isAuthenticated())) {
@@ -18,12 +18,12 @@ async function DashboardPage() {
         <div className="rounded-lg">
           <Sidebar />
         </div>
-        <div className="rounded-lg lg:col-span-2">
-          <Dashboard />
+        <div className="rounded-lg lg:col-span-2 bg-gray-100 p-4">
+          <Profile />
         </div>
       </div>
     </div>
   );
 }
 
-export default DashboardPage;
+export default ProfilePage;

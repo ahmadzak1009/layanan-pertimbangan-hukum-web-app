@@ -112,7 +112,7 @@ function Profile() {
             </label>
 
             <Input
-              type="text"
+              type="number"
               id="no_hp"
               name="no_hp"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
@@ -132,7 +132,7 @@ function Profile() {
             </label>
 
             <Input
-              type="text"
+              type="number"
               id="nip"
               name="nip"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
@@ -151,7 +151,7 @@ function Profile() {
             </label>
 
             <Input
-              type="text"
+              type="number"
               id="nik"
               name="nik"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
