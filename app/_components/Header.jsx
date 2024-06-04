@@ -73,7 +73,7 @@ function Header() {
             <div className="flex-1 md:flex md:items-center md:gap-12">
               <Link className="block text-teal-600" href="/">
                 <span className="sr-only">Home</span>
-                <Image src="/logo.svg" alt="logo" width={180} height={80} />
+                <Image src="/accountlogo.png" alt="logo" width={50} height={50} />
               </Link>
             </div>
 

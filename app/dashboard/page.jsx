@@ -5,6 +5,11 @@ import Link from "next/link";
 import Sidebar from "./_components/Sidebar";
 import Dashboard from "./_components/Dashboard";
 
+export const metadata = {
+  title: "...",
+  description: "...",
+};
+
 async function DashboardPage() {
   const { isAuthenticated } = getKindeServerSession();
 
