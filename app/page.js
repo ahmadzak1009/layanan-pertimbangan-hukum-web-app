@@ -11,3 +11,7 @@ export default function Home() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
+};

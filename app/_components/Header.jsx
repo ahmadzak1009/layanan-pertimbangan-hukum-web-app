@@ -71,9 +71,16 @@ function Header() {
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex-1 md:flex md:items-center md:gap-12">
-              <Link className="block text-teal-600" href="/">
+              <Link className="flex text-teal-600" href="/">
                 <span className="sr-only">Home</span>
                 <Image src="/accountlogo.png" alt="logo" width={50} height={50} />
+
+                <div className="ml-3">
+                  <b>
+                    Pertimbangan Hukum <br />
+                    Kejaksaan Negeri Tana Toraja
+                  </b>
+                </div>
               </Link>
             </div>
 

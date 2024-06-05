@@ -10,7 +10,7 @@ function Hero() {
 
   return (
     <>
-      <section id="hero">
+      <section id="hero" className="bg-[url('https://halojpn.id/assets/media/misc/gradien.png')]">
         <div className="mx-auto max-w-screen-xl px-4 pt-6 pb-20 sm:px-6 lg:px-8 lg:pt-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="relative h-full overflow-hidden rounded-lg sm:h-full lg:order-last lg:h-full">
