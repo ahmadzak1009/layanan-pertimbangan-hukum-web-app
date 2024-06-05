@@ -5,6 +5,11 @@ import Link from "next/link";
 import Profile from "../_components/Profile";
 import Sidebar from "../_components/Sidebar";
 
+export const metadata = {
+  title: "Profile",
+  description: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
+};
+
 async function ProfilePage() {
   const { isAuthenticated } = getKindeServerSession();
 

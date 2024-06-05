@@ -6,8 +6,8 @@ import Sidebar from "./_components/Sidebar";
 import Dashboard from "./_components/Dashboard";
 
 export const metadata = {
-  title: "...",
-  description: "...",
+  title: "Dashboard",
+  description: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
 };
 
 async function DashboardPage() {

@@ -4,6 +4,11 @@ import { redirect } from "next/navigation";
 import Sidebar from "../_components/Sidebar";
 import DaftarPengajuan from "../_components/DaftarPengajuan";
 
+export const metadata = {
+  title: "Daftar Permohonan",
+  description: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
+};
+
 async function DaftarPermohonan() {
   const { isAuthenticated } = getKindeServerSession();
 

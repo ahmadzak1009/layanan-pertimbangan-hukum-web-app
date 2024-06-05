@@ -5,6 +5,11 @@ import Link from "next/link";
 import Sidebar from "../_components/Sidebar";
 import FormPermohonan from "../_components/FormPermohonan";
 
+export const metadata = {
+  title: "Buat Permohonan",
+  description: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
+};
+
 async function BuatPermohonan() {
   const { isAuthenticated } = getKindeServerSession();
 

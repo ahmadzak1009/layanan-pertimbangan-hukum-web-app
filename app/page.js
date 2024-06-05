@@ -14,4 +14,5 @@ export default function Home() {
 
 export const metadata = {
   title: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
+  description: "Layanan Pertimbangan Hukum Kejaksaan Negeri Tana Toraja",
 };
