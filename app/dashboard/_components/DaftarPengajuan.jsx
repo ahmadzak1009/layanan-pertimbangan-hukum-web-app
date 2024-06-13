@@ -1,8 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { Modal, Table, Timeline } from "flowbite-react";
+import { Modal, Table, Timeline, FileInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { SlInfo, SlDoc } from "react-icons/sl";
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { format } from "date-fns";
@@ -13,7 +14,14 @@ function DaftarPengajuan() {
   const [openModal, setOpenModal] = useState(false);
   const [pengguna, setPengguna] = useState({});
   const [idPengguna, setIdPengguna] = useState("");
+  const [file, setFile] = useState();
   const [dataModal, setDataModal] = useState({});
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const { user, isLoading } = useKindeBrowserClient();
 
@@ -27,6 +35,11 @@ function DaftarPengajuan() {
         .catch((err) => console.log(err));
     }
   }, [isLoading]);
+
+  const onSubmit = (data, e) => {
+    const file = data.dokumenSurat[0];
+    console.log(file);
+  };
 
   return (
     <>
@@ -159,7 +172,24 @@ function DaftarPengajuan() {
 
                 <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                   <dt className="font-medium text-gray-900">Dokumen Pendukung</dt>
-                  <dd className="text-gray-700 sm:col-span-2"></dd>
+                  <dd className="text-gray-700 sm:col-span-2">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex">
+                      <FileInput
+                        id="dokumenSurat"
+                        name="dokumenSurat"
+                        accept="application/pdf"
+                        className="mr-3"
+                        {...register("dokumenSurat", { required: true })}
+                      />
+
+                      <button
+                        type="submit"
+                        className="inline-block shrink-0 rounded-md border border-blue-600 bg-primary px-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-black"
+                      >
+                        Upload
+                      </button>
+                    </form>
+                  </dd>
                 </div>
               </dl>
             </div>

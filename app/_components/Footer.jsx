@@ -12,7 +12,7 @@ function Footer() {
               <p className="mx-auto mt-4 max-w-sm ">
                 <b>Kantor Jaksa Pengacara Negara</b> <br />
                 JL. PONGTIKU NO.6 MAKALE KABUPATEN TANA TORAJA - 91811 <br />
-                TELP/FAX. (0423) 22008 EMAIL: kejari_makale@yahoo.com
+                TELP/FAX. (0423) 22008 EMAIL: datunkejaritator@gmail.com
               </p>
 
               {/* <a
