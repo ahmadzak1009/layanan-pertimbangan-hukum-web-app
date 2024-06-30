@@ -1,3 +1,4 @@
+import DasarHukum from "./_components/DasarHukum";
 import Hero from "./_components/Hero";
 import Layanan from "./_components/Layanan";
 import Tentang from "./_components/Tentang";
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
       <Hero />
       <Layanan />
+      <DasarHukum />
       <Tentang />
     </div>
   );
