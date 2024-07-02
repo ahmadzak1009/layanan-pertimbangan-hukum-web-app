@@ -6,7 +6,20 @@ function DasarHukum() {
       <section id="dasar-hukum">
         <div className="mx-auto max-w-screen-xl px-4 pt-6 pb-8 sm:px-6 lg:px-8 lg:pt-16">
           <article className="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8">
-            <div className="flex items-start sm:gap-8">
+            <div className="flex items-center sm:gap-8">
+              <div
+                className="hidden sm:grid sm:size-60 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+                aria-hidden="true"
+              >
+                <div className="flex items-center gap-1">
+                  <span className="h-8 w-0.5 rounded-full bg-indigo-500"></span>
+                  <span className="h-6 w-0.5 rounded-full bg-indigo-500"></span>
+                  <span className="h-4 w-0.5 rounded-full bg-indigo-500"></span>
+                  <span className="h-6 w-0.5 rounded-full bg-indigo-500"></span>
+                  <span className="h-8 w-0.5 rounded-full bg-indigo-500"></span>
+                </div>
+              </div>
+
               <div className="flex flex-col justify-center items-center">
                 <h1>
                   <strong className="rounded border border-primary bg-primary px-3 py-1.5 text-lg font-medium text-white">
