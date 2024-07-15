@@ -15,7 +15,7 @@ import { ImProfile } from "react-icons/im";
 function FormPermohonan() {
   const [pengguna, setPengguna] = useState({});
   const [idPengguna, setIdPengguna] = useState();
-  const [file, setFile] = useState();
+  // const [file, setFile] = useState();
   const { user, isLoading } = useKindeBrowserClient();
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
@@ -45,9 +45,10 @@ function FormPermohonan() {
   }, [isLoading]);
 
   function onSubmit(data, e) {
-    const file = data.dokumenSurat[0];
+    const files = data.dokumenSurat;
 
-    // console.log(e);
+    // console.log(files);
+    // return;
 
     GlobalApi.addPengajuan({
       data: {
@@ -69,17 +70,19 @@ function FormPermohonan() {
     })
       .then((res) => {
         // console.log(res.data);
-        const form = new FormData();
-        form.append("ref", "api::pengajuan.pengajuan");
-        form.append("refId", res.data.data.id);
-        form.append("field", "dokumenSurat");
-        form.append("files", file);
+        for (let i = 0; i < files.length; i++) {
+          const form = new FormData();
+          form.append("ref", "api::pengajuan.pengajuan");
+          form.append("refId", res.data.data.id);
+          form.append("field", "dokumenSurat");
+          form.append("files", files[i]);
 
-        GlobalApi.uploadDokumen(form)
-          .then((res) => {
-            setOpenModal(true);
-          })
-          .catch((err) => console.log(err));
+          GlobalApi.uploadDokumen(form)
+            .then((res) => {
+              setOpenModal(true);
+            })
+            .catch((err) => console.log(err));
+        }
       })
       .catch((err) => console.log(err));
   }
@@ -173,6 +176,7 @@ function FormPermohonan() {
               name="dokumenSurat"
               accept="application/pdf"
               className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              multiple
               {...register("dokumenSurat", { required: true })}
             />
             {errors.dokumenSurat && (

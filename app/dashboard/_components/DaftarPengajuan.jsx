@@ -81,14 +81,22 @@ function DaftarPengajuan() {
                     </span>
                   </Table.Cell>
                   <Table.Cell>
-                    <a
-                      href={v.attributes.dokumenSurat.data.attributes.url}
-                      target="_blank"
-                      className="flex items-center font-medium cursor-pointer text-cyan-600 dark:text-cyan-500"
-                    >
-                      <SlDoc />
-                      Lihat
-                    </a>
+                    {v.attributes?.dokumenSurat?.data[0] ? (
+                      v.attributes.dokumenSurat.data.map((v, i) => (
+                        <div>
+                          <a
+                            href={v.attributes.url}
+                            target="_blank"
+                            className="flex items-center font-medium cursor-pointer text-cyan-600 dark:text-cyan-500"
+                          >
+                            <SlDoc />
+                            Lihat
+                          </a>
+                        </div>
+                      ))
+                    ) : (
+                      <></>
+                    )}
                   </Table.Cell>
                   <Table.Cell>
                     <a
