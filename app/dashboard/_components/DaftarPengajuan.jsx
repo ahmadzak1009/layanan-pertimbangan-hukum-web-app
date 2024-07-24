@@ -109,7 +109,7 @@ function DaftarPengajuan() {
                           penandatanganSurat: v.attributes.penandatanganSurat,
                           nomorSurat: v.attributes.nomorSurat,
                           tanggalPengajuan: v.attributes.createdAt,
-                          dokumenSurat: v.attributes.dokumenSurat.data.attributes.url,
+                          dokumenSurat: v.attributes.dokumenSurat.data[0].attributes.url,
                           progressPengajuan: v.attributes.progressPengajuan,
                         });
                       }}
