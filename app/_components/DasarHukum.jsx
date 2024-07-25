@@ -35,7 +35,7 @@ function DasarHukum() {
                   </div>
                 </h3>
 
-                <p className="mt-1 text-sm text-gray-700 px-2 sm:px-9">
+                <div className="mt-1 text-sm text-gray-700 px-2 sm:px-9">
                   <ul className="list-disc text-justify">
                     <li>
                       Undang-Undang Nomor 16 Tahun 2004 tentang Kejaksaan Republik Indonesia
@@ -59,7 +59,7 @@ function DasarHukum() {
                       Tahun 2021 Nomor 443);
                     </li>
                   </ul>
-                </p>
+                </div>
               </div>
             </div>
           </article>
